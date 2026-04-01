@@ -15,7 +15,7 @@ pip install aisecurity
 
 ## Configuration
 
-Before running the script, open `prettyapi2.py` and update the following values in the **Initialize** section near the top of the file:
+Before running the script, open `AIRS-API-tester.py` and update the following values in the **Initialize** section near the top of the file:
 
 ```python
 aisecurity.init(api_key="")  # Add your API key here
@@ -30,7 +30,7 @@ profile_name = ""            # Add your profile name here
 Run the script using Python 3:
 
 ```bash
-python3 prettyapi2.py
+python3 AIRS-API-tester.py
 ```
 
 You will be prompted to enter an AI prompt to test. The script will submit it to AIRS and display a formatted security report showing:
