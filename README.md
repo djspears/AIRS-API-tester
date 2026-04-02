@@ -1,16 +1,20 @@
 # AIRS-API-tester
 
-A command-line tool for testing prompts against Palo Alto Networks **AI Runtime Security (AIRS)** using the `aisecurity` Python SDK.
+A command-line tool for testing prompts against Palo Alto Networks **AI Runtime Security (AIRS)** using the `pan-aisecurity` Python SDK.
 
 ## Prerequisites
 
-- Python 3
-- `aisecurity` Python package
+- Python 3.12+
+- `pan-aisecurity` Python package
 
-Install the package:
+## Setup (macOS)
+
+Create and activate a virtual environment, then install the package:
 
 ```bash
-pip install aisecurity
+python3.12 -m venv .venv
+source .venv/bin/activate
+pip3 install pan-aisecurity
 ```
 
 ## Configuration
@@ -27,19 +31,23 @@ profile_name = ""            # Add your profile name here
 
 ## Usage
 
-Run the script using Python 3:
+Run the script using Python 3.12:
 
 ```bash
-python3 AIRS-API-tester.py
+python3.12 AIRS-API-tester.py
 ```
 
-You will be prompted to enter an AI prompt to test. The script will submit it to AIRS and display a formatted security report showing:
+You will be prompted to enter an AI prompt to test. After each scan, you will be asked if you want to test another prompt. Enter `y` to continue or `n` to exit.
 
-- Overall verdict (ALLOW / BLOCK)
-- Threat category
-- Profile used
-- Prompt analysis (malicious URLs, injection, data leakage, toxicity)
-- Response analysis (sensitive data, ungrounded content)
+## Code Structure
+
+The script is organized into three standalone functions:
+
+| Function | Description |
+|---|---|
+| `send_scan(profile_name, user_prompt)` | Sends the prompt to the AIRS API and returns the raw result dict |
+| `print_scan_report(data)` | Pretty-prints the scan result to the terminal |
+| `run_security_scan(profile_name)` | Main loop — prompts for input, calls the above functions, and asks to continue |
 
 ## Example Output
 
@@ -65,4 +73,6 @@ RESPONSE ANALYSIS:
   • Sensitive Data: ✅ Clear
   • Ungrounded:     ✅ Clear
 ==================================================
+
+Test another prompt? (y/n):
 ```
